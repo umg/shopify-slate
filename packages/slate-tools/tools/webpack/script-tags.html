@@ -53,8 +53,9 @@
     <% } %>
   <% } else { %>
     <script type="text/javascript" src="<%= src %>" defer></script>
-  <% } %> 
-<% } %> {%- if template.name == 'product' and template.suffix != blank -%}
+  <% } %>
+<% } %>
+{%- if template.name == 'product' and template.suffix != blank -%}
   {%- unless template.suffix contains 'unique' -%}
   <script type="text/javascript" src="{{ 'template.product.js' | asset_url }}" defer="defer"></script>
   {%- endunless  -%}
