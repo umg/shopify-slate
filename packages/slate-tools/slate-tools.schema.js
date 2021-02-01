@@ -87,7 +87,7 @@ module.exports = {
   'webpack.babel.exclude': (config) => config.get('webpack.commonExcludes'),
 
   // Paths to exclude for all webpack loaders
-  'webpack.commonExcludes': [/node_modules/, /assets\/static/],
+  'webpack.commonExcludes': [/assets\/static/],
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge
