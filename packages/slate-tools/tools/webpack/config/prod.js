@@ -95,4 +95,5 @@ module.exports = merge([
     },
   },
   config.get('webpack.extend'),
+  config.get('webpack.extendBabel7'),
 ]);

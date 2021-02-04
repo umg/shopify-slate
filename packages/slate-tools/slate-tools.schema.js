@@ -1,5 +1,6 @@
 const path = require('path');
 const os = require('os');
+
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const commonPaths = require('@shopify/slate-config/common/paths.schema');
@@ -87,11 +88,68 @@ module.exports = {
   'webpack.babel.exclude': (config) => config.get('webpack.commonExcludes'),
 
   // Paths to exclude for all webpack loaders
-  'webpack.commonExcludes': [/node_modules/, /assets\/static/],
+  'webpack.commonExcludes': [/assets\/static/],
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge
+
   'webpack.extend': {},
+
+  // Extending to use babel7
+  'webpack.extendBabel7': {
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /(bower_components)/,
+          use: {
+            loader: `babel-loader`,
+            options: {
+              presets: [
+                [
+                  '@babel/preset-env',
+                  {
+                    useBuiltIns: 'entry',
+                    corejs: 2,
+                    targets: {
+                      chrome: '58',
+                      ie: '11',
+                    },
+                    debug: false,
+                    bugfixes: true,
+                  },
+                ],
+                [
+                  '@babel/preset-react',
+                  {
+                    useBuiltIns: true,
+                    pragma: 'React.createElement',
+                    pragmaFrag: 'React.Fragment',
+                    development: false,
+                  },
+                ],
+              ],
+              plugins: [
+                '@babel/plugin-syntax-dynamic-import',
+                '@babel/plugin-transform-react-constant-elements',
+                '@babel/plugin-proposal-class-properties',
+                [
+                  'babel-plugin-module-resolver',
+                  {
+                    root: ['./'],
+                    alias: {
+                      regeneratorRuntime:
+                        '../../node_modules/regenerator-runtime',
+                    },
+                  },
+                ],
+              ],
+            },
+          },
+        },
+      ],
+    },
+  },
 
   // Enabling sourcemaps in styles when using Hot Module Reloading causes
   // style-loader to inject styles using a <link> tag instead of <style> tag.
