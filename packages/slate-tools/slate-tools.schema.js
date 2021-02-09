@@ -1,5 +1,6 @@
 const path = require('path');
 const os = require('os');
+
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
 const commonPaths = require('@shopify/slate-config/common/paths.schema');
@@ -91,6 +92,7 @@ module.exports = {
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge
+
   'webpack.extend': {},
 
   // Enabling sourcemaps in styles when using Hot Module Reloading causes
