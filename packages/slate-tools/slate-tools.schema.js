@@ -88,12 +88,12 @@ module.exports = {
   'webpack.babel.exclude': (config) => config.get('webpack.commonExcludes'),
 
   // Paths to exclude for all webpack loaders
-  'webpack.commonExcludes': [/assets\/static/],
+  'webpack.commonExcludes': [/node_modules/, /assets\/static/],
 
   // Extends webpack development config using 'webpack-merge'
   // https://www.npmjs.com/package/webpack-merge
 
-  'webpack.extend': {},  
+  'webpack.extend': {},
 
   // Enabling sourcemaps in styles when using Hot Module Reloading causes
   // style-loader to inject styles using a <link> tag instead of <style> tag.

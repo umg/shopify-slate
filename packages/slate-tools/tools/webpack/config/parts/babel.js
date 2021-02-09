@@ -1,14 +1,15 @@
 const fs = require('fs');
 
 const SlateConfig = require('@shopify/slate-config');
+const browserslist = require('browserslist');
 
 const config = new SlateConfig(require('../../../../slate-tools.schema'));
 
 const part = {module: {rules: []}};
 
 const babelLoader = {
-  test: /\.js$/,
-  exclude: config.get('webpack.babel.exclude'),
+  test: /\.m?js$/,
+  exclude: /(bower_components)/,
   loader: 'babel-loader',
   options: {
     babelrc: false,
@@ -18,10 +19,11 @@ const babelLoader = {
         {
           useBuiltIns: 'entry',
           corejs: 2,
-          targets: {
-            chrome: '58',
-            ie: '11',
-          },
+          targets: browserslist(
+            'defaults',
+            'not IE 11',
+            'maintained node versions',
+          ),
           debug: false,
           bugfixes: true,
         },
