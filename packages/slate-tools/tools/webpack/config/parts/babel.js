@@ -9,7 +9,7 @@ const part = {module: {rules: []}};
 
 const babelLoader = {
   test: /\.m?js$/,
-  exclude: /(bower_components)/,
+  exclude: /assets\/static/,
   loader: 'babel-loader',
   options: {
     babelrc: false,
